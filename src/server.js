@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 
 app.get('/message/:id/:user', (request, response) => {
-  response.send(`Id from the URL is: ${request.params.id}.
-  User from the URL is: ${request.params.user}`);
+  const { id, user } = request.params;
+  response.send(`Message ${id} from ${user}`);
 });
 
 const PORT = process.env.PORT || 3000;
