@@ -1,19 +1,15 @@
 const { Router } = require('express');
+
+const UsersController = require('../controllers/UsersController');
+
 const usersRoutes = Router();
+
+const usersController = new UsersController();
 
 // example how to use:
 // http://localhost:3000/users?page=2&limit=3
-usersRoutes.get('/', (request, response) => {
-  const { page, limit } = request.query;
-  response.send(`Users page ${page} with limit ${limit}`);
-});
+usersRoutes.get('/', usersController.get);
 
-usersRoutes.post('/', (request, response) => {
-  const { name, email, age } = request.body;
-
-  response.send(
-    `Your name is ${name}, send e-mail from ${email} and your age: ${age}`
-  );
-});
+usersRoutes.post('/', usersController.create);
 
 module.exports = usersRoutes;
